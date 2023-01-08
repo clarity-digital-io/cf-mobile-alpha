@@ -6,27 +6,40 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useState } from 'react';
 import Svg, { Path } from "react-native-svg"
+import {
+  QueryClient,
+  QueryClientProvider,
+} from 'react-query'
+
+const queryClient = new QueryClient()
 
 export default function App() {
 
-  const [isSignedIn, setSignedIn] = useState(false);
-  return (
-    <NavigationContainer>
-      {
-        isSignedIn ?
-          <TabNavigation /> :
-          <LoginNavigation />
-      }
+  const [isSignedIn, setSignedIn] = useState(true);
 
-    </NavigationContainer>
+  return (
+    <QueryClientProvider client={queryClient}>
+      <NavigationContainer>
+        {
+          isSignedIn ?
+            <TabNavigation /> :
+            <LoginNavigation />
+        }
+
+      </NavigationContainer>
+    </QueryClientProvider>
   );
 }
 
-const Stack = createStackNavigator();
+type RootStackParamList = {
+  Login: undefined;
+};
+
+const Stack = createStackNavigator<RootStackParamList>();
 
 const LoginNavigation = () => {
   return <Stack.Navigator
-    screenOptions={({ route }) => ({
+    screenOptions={() => ({
       headerShown: false
     })}
   >

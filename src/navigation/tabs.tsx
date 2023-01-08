@@ -9,7 +9,14 @@ import { SettingsScreen } from '../screens/Settings';
 import { SparklesIcon, Cog8ToothIcon, DocumentCheckIcon, ClipboardDocumentCheckIcon, ClipboardDocumentIcon } from "react-native-heroicons/solid";
 import { SparklesIcon as SparklesIconOutline, Cog8ToothIcon as Cog8ToothIconOutline, DocumentCheckIcon as DocumentCheckIconOutline, ClipboardDocumentCheckIcon as ClipboardDocumentCheckIconOutline, ClipboardDocumentIcon as ClipboardDocumentIconOutline } from "react-native-heroicons/outline";
 
-const Tab = createBottomTabNavigator();
+type RootStackParamList = {
+  Checklists: undefined;
+  Forms: undefined;
+  Responses: undefined;
+  Settings: undefined;
+};
+
+const Tab = createBottomTabNavigator<RootStackParamList>();
 
 export const TabNavigation = () => {
 
