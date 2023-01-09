@@ -1,6 +1,5 @@
 export enum QuestionTypes {
   None,
-  ConnectedObject,
   MultipleChoice,
   Comment,
   Dropdown,
@@ -18,6 +17,7 @@ export enum QuestionTypes {
   GeoLocation,
   Attachments,
   Photo,
+  File,
   BOOLEAN,
   DATETIME,
   CURRENCY,
@@ -38,4 +38,10 @@ export enum QuestionTypes {
   URL,
   REFERENCE,
   STRING
+}
+
+export enum QuestionCategory {
+  Input,
+  Display,
+  Guide
 }

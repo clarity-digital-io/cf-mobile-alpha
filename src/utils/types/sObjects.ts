@@ -1,5 +1,5 @@
 import { FilterLogicTypes, OperatorTypes } from "./criteria";
-import { QuestionTypes } from "./fields";
+import { QuestionCategory, QuestionTypes } from "./fields";
 
 export const namespace = 'cforms__';
 
@@ -91,6 +91,7 @@ export type Question__c = {
   cforms__Step__c?: string
   cforms__Title__c: string
   cforms__Type__c: QuestionTypes
+  cforms__Category__c: QuestionCategory
   cforms__Logic__c?: string // picklist
   cforms__Custom_Logic__c?: FilterLogicTypes
   cforms__Question_Criteria__r?: Question_Criteria__c[]

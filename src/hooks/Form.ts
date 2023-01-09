@@ -8,7 +8,7 @@ import {
   formInitialState,
   formReducer,
 } from '../reducers'
-import { Form__c, Question__c } from '../utils/types/sObjects';
+import { Form__c, Question_Criteria__c, Question__c } from '../utils/types/sObjects';
 
 export const useForm = (formId: string) => {
   const [state, dispatch] = useReducer(
@@ -27,7 +27,7 @@ export const useForm = (formId: string) => {
         dispatch({
           type: 'INIT_FORM',
           form: form,
-          questions: questions
+          questions: questions // set questions with correct logic, all set to falseo initially 
         })
       },
       onError: (data) => {
@@ -35,6 +35,14 @@ export const useForm = (formId: string) => {
       }
     }
   )
+
+  // criteria setup 
+
+  type QuestionWithCriteria = {
+    visibility: boolean,
+    question: Question__c,
+    criteria: Question_Criteria__c
+  }
 
   // for new forms no answers yet 
   // need to be able to set answers though 

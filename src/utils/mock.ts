@@ -42,6 +42,7 @@ const generate = (): Mock => {
         cforms__Title__c: 'Title' + '-' + index.toString(),
         cforms__Order__c: index,
         cforms__Type__c: index,
+        cforms__Category__c: 0,
         cforms__Page__c: 0 // Math.floor(index / 10),
       } as Question__c)
 
@@ -58,6 +59,17 @@ const generate = (): Mock => {
 
       // }
     }
+
+    // add a guide category question
+    _newQuestions.push({
+      Id: formId + _newQuestions.length,
+      cforms__Form__c: formId,
+      cforms__Title__c: 'Guide 1',
+      cforms__Order__c: _newQuestions.length,
+      cforms__Type__c: QuestionTypes.File,
+      cforms__Category__c: 0,
+      cforms__Page__c: 0 // Math.floor(index / 10),
+    } as Question__c)
 
     for (let index = 0; index < MAX_RESPONSES; index++) {
       _newResponses.push({

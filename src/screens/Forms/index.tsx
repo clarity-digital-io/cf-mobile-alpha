@@ -5,6 +5,7 @@ import { useForms } from '../../queries/myForms';
 import { Form__c, Response__c } from '../../utils/types/sObjects';
 import { createStackNavigator } from '@react-navigation/stack';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { ClipboardDocumentIcon as ClipboardDocumentIconOutline } from "react-native-heroicons/outline";
 
 type RootStackParamList = {
   FormsList: undefined;
@@ -14,13 +15,11 @@ type RootStackParamList = {
 const FormsStack = createStackNavigator<RootStackParamList>();
 
 const StyledScrollView = styled(ScrollView);
+const StyledClipboardDocumentCheckIconOutline = styled(ClipboardDocumentIconOutline);
 
 export const FormsScreen = () => {
   return <FormsStack.Navigator
     initialRouteName="FormsList"
-    screenOptions={() => ({
-      headerShown: false
-    })}
   >
     <FormsStack.Screen name='FormsList' component={FormsList} />
     <FormsStack.Screen name='Form' component={Form} />
@@ -40,8 +39,27 @@ export const FormsList = ({ navigation }: { navigation: any }) => {
       <StyledScrollView className='dark:bg-slate-800'>
         {
           data.map((form: Form__c) => {
-            return <TouchableWithoutFeedback key={form.Id} onPress={() => handleSelect(form)} className='text-semibold justify-center p-4 border border-slate-200'>
-              <Text>{form.cforms__Title__c}</Text>
+            return <TouchableWithoutFeedback
+              key={form.Id}
+              onPress={() => handleSelect(form)}
+            >
+              <View className='bg-slate-200 flex flex-row gap-4  p-2'>
+                <View className='basis-1/5'>
+                  <StyledClipboardDocumentCheckIconOutline className='text-slate-900 p-2' />
+                </View>
+                <View className='basis-4/5'>
+                  <Text className='text-bold text-lg p-2'>
+                    {form.cforms__Title__c}
+                  </Text>
+                  <Text className='text-normal text-sm p-2'>
+                    {form.cforms__Description__c}
+                  </Text>
+                  <Text className='text-normal text-sm p-2'>
+                    {form.cforms__Status__c}
+                  </Text>
+                </View>
+              </View>
+
             </TouchableWithoutFeedback>
           })
         }
